@@ -1,0 +1,37 @@
+<!--doctype html-->
+<html>
+
+<head>
+
+  <title>forum page</title>
+
+</head>
+
+<body>
+
+  <form action="new_forum.php" method="post" enctype="multipart/form-data">
+
+    <label for="tvbn">TVshow/book name:</label>
+    <input type="text" id="title" name="title"><br><br>
+
+
+    <label for="td">your description:</label>
+    <input type="text" id="description" name="description"><br><br>
+
+
+    <label for="il">IMDB link:</label>
+    <input type="text" id="imdb" name="imdb"><br><br>
+
+
+
+    <label for="yr">your review 1-5 stars:</label>
+    <input type="text" id="stars" name="stars"><br><br>
+
+    <input type="file" name="fileToUpload" id="fileToUpload">
+
+
+    <input type="submit" value="create forum" name="submit">
+  </form>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!--doctype html-->
+<html>
+
+<head>
+
+  <title>forum page</title>
+
+</head>
+
+<body>
+
+  <form action="post.php" method="post" enctype="multipart/form-data">
+
+
+    <label for="td">id:</label>
+    <input type="text" id="id" name="id"><br><br>
+
+
+    <label for="il">name:</label>
+    <input type="text" id="name" name="name"><br><br>
+
+
+
+    <label for="yr">text:</label>
+    <input type="text" id="text" name="text"><br><br>
+
+
+    <input type="submit" value="post" name="submit">
+  </form>
+
+  <form action="get_form.php" method="post" enctype="multipart/form-data">
+
+
+    <label for="td">id:</label>
+    <input type="text" id="id" name="id"><br><br>
+
+
+    <input type="submit" value="get_messages" name="submit">
+  </form>
+
+</body>
+
+</html>
