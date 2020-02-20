@@ -73,4 +73,4 @@ $sql = "create table ".$id." (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, pos
 $conn->query($sql);
 $conn->close();
 
-header("Location: home.html");
+header("Location: home.php");
