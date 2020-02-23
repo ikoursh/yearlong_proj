@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-
-    <title>Post Books</title>
+    <title>CSS Template</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -23,10 +21,12 @@
             color: white;
         }
 
+
         section {
             display: -webkit-flex;
             display: flex;
         }
+
 
         nav {
             -webkit-flex: 1;
@@ -49,6 +49,14 @@
             padding: 10px;
         }
 
+        article {
+            -webkit-flex: 3;
+            -ms-flex: 3;
+            flex: 3;
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+
         footer {
             background-color: #777;
             padding: 10px;
@@ -67,14 +75,14 @@
 <body>
 
 <header>
-    <a style="color: white;text-decoration: none;" href="#"><h1>PostBook</h1></a>
+    <a style="color: white;text-decoration: none;" href="home.php"><h1>PostBook</h1></a>
 </header>
 
 <section>
     <nav>
         <ul>
-            <li><h3>Books!</h3></li>
             <?php
+
             $servername = "localhost";
             $username = "meet";
             $password = "=vh2MfzK+G@@t8h!";
@@ -82,33 +90,39 @@
 
             // Create connection
             $conn = new mysqli($servername, $username, $password, $db);
+            $forum = mysqli_query($conn, "select * FROM forums where id=\"" . htmlspecialchars($_GET["id"]) . "\";");
 
-            $books = mysqli_query($conn, "select * FROM forums where tag='book'");
+            $forum = $forum->fetch_array(MYSQLI_ASSOC);
+            echo "<h3>" . $forum["title"] . "</h3><br>";
+            echo "<p> Description:<br>" . $forum["description"] . "</p><br>";
+            echo "<p>" . $forum["stars"] . " stars</p><br>";
+            echo "<a href=\"" . $forum["imdb"] . "\">for more information</a>";
 
-            while ($row = $books->fetch_array(MYSQLI_ASSOC)) {
-                echo "<li><a href=\"forum.php?id=" . $row["id"] . "\">" . $row["title"] . "</a></li>";
+            echo "</ul>";
+            echo "</nav>";
+            echo "<article>";
+            echo "<forum>";
+            echo "<h4>Comments</h4>";
+
+            $comments = mysqli_query($conn, "select * FROM " . htmlspecialchars($_GET["id"]) . ";");
+
+            while ($comment = $comments->fetch_array(MYSQLI_ASSOC)) {
+                var_dump($comment);
+                echo "<p>" . $comment["message"] . "</p>";
             }
 
-            echo "<br>";
-            echo "<li><h3>TV Shows!</h3></li>";
-
-            $movies = mysqli_query($conn, "select * FROM forums where tag='movie'");
-
-            while ($row = $movies->fetch_array(MYSQLI_ASSOC)) {
-                echo "<li><a href=\"forum.php?id=" . $row["id"] . "\">" . $row["title"] . "</a></li>";
-            }
             $conn->close();
             ?>
 
-        </ul>
+            </article>
+</section>
 
-        <form action="crete_forum_page.html">
-            <input type="submit" value="to create a new review"/>
-        </form>
-
-    </nav>
 
 </section>
+
+<footer>
+    <p>for any question, please contact us via us@idk.com</p>
+</footer>
 
 </body>
 </html>
