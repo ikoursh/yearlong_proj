@@ -2,5 +2,5 @@
 body {
 	background-image: url("assets/new_forum_bg.jpg");
 	background-repeat: no-repeat;
-	background-size: 100%;
+    background-size: cover;                      
 }
