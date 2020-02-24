@@ -12,4 +12,6 @@ $conn->query($query1);
 $query2 = "insert into `" . htmlspecialchars($_POST["id"]) . "`(poster_name, message) VALUES (\"" . htmlspecialchars($_POST["name"]) . "\",\"" . htmlspecialchars($_POST["text"]) . "\");";
 $conn->query($query2);
 $conn->close();
+
+header("Location: forum.php?id=" . htmlspecialchars($_POST["id"]));
 ?>

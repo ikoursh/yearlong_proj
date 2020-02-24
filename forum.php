@@ -104,15 +104,24 @@
             echo "<forum>";
             echo "<h4>Comments</h4>";
 
-            $comments = mysqli_query($conn, "select * FROM " . htmlspecialchars($_GET["id"]) . ";");
+            $comments = mysqli_query($conn, "select * FROM " . htmlspecialchars($_GET["id"]));
 
             while ($comment = $comments->fetch_array(MYSQLI_ASSOC)) {
-                var_dump($comment);
-                echo "<p>" . $comment["message"] . "</p>";
+                echo "<p><b>" . $comment["poster_name"] . "</b>: " . $comment["message"] . "</p>";
             }
 
             $conn->close();
             ?>
+
+            <form method="post" action="post.php">
+                <label for="name">name:</label><br>
+                <input type="text" id="name" name="name" value="John"><br>
+                <label for="text">comment:</label><br>
+                <input type="text" id="text" name="text" value="great"><br><br>
+                <?php echo "<input type=\"hidden\" name=\"id\" value=\"" . htmlspecialchars($_GET["id"]) . "\">"; ?>
+                <input type="submit" value="comment">
+            </form>
+
 
             </article>
 </section>
