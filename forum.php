@@ -93,6 +93,7 @@
             $forum = mysqli_query($conn, "select * FROM forums where id=\"" . htmlspecialchars($_GET["id"]) . "\";");
 
             $forum = $forum->fetch_array(MYSQLI_ASSOC);
+            echo "<img src='images/" . $forum["id"] . "' alt='picture for " . $forum["title"] . "'>";
             echo "<h3>" . $forum["title"] . "</h3><br>";
             echo "<p> Description:<br>" . $forum["description"] . "</p><br>";
             echo "<p>" . $forum["stars"] . " stars</p><br>";

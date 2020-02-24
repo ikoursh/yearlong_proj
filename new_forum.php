@@ -50,11 +50,11 @@ if (!($_FILES['fileToUpload']['error'] > 0)) {
         throw new RuntimeException('Invalid file format.');
     }
     // get the file extention
-    $ext = end(explode(".", $_FILES['fileToUpload']['name']));
+//    $ext = end(explode(".", $_FILES['fileToUpload']['name']));
 
     move_uploaded_file(
         $_FILES['fileToUpload']['tmp_name'],
-        "images/" . $id . "." . $ext
+        "images/" . $id //. "." . $ext
     );
 }
 
