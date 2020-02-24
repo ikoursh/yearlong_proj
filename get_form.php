@@ -32,4 +32,4 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 
 
 echo json_encode($info_array);
-?>
+

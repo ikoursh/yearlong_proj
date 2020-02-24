@@ -97,7 +97,7 @@
             echo "<h3>" . $forum["title"] . "</h3><br>";
             echo "<p> Description:<br>" . $forum["description"] . "</p><br>";
             echo "<p>" . $forum["stars"] . " stars</p><br>";
-            echo "<a href=\"" . $forum["imdb"] . "\">for more information</a>";
+            echo "<a href=\"" . $forum["imdb"] . "\" target=\"_blank\">for more information</a>";
 
             echo "</ul>";
             echo "</nav>";

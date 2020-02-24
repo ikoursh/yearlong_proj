@@ -14,4 +14,4 @@ $conn->query($query2);
 $conn->close();
 
 header("Location: forum.php?id=" . htmlspecialchars($_POST["id"]));
-?>
+
