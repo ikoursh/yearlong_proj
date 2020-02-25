@@ -5,6 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        .delete {
+            visibility: hidden;
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -70,6 +74,8 @@
                 flex-direction: column;
             }
         }
+
+
     </style>
 </head>
 <body>
@@ -108,8 +114,10 @@
             $comments = mysqli_query($conn, "select * FROM " . htmlspecialchars($_GET["id"]));
 
             while ($comment = $comments->fetch_array(MYSQLI_ASSOC)) {
-                echo "<p><b>" . $comment["poster_name"] . "</b>: " . $comment["message"] . "</p>";
+                echo "<b>" . $comment["poster_name"] . "</b>: " . $comment["message"] . "<a class=delete href='delete_comment.php?fid=" . $forum["id"] . "&cid=" . $comment["id"] . "'><img  alt=\"delete icon\" src='assets/trash.png' width='20px'/></a> <br />";
             }
+
+            echo "<br/>";
 
             $conn->close();
             ?>
@@ -132,6 +140,8 @@
 
 <footer>
     <p>for any question, please contact us via us@idk.com</p>
+    <button onclick="for (let el of document.querySelectorAll('.delete')) el.style.visibility = 'visible';">admin mode
+    </button>
 </footer>
 
 </body>
