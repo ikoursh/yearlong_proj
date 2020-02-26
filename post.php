@@ -1,4 +1,5 @@
 <?php
+error_reporting(0); //disable php error reporting as to not print error messages to the user
 
 $servername = "localhost";
 $username = "meet";

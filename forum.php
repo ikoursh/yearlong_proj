@@ -88,6 +88,8 @@
     <nav>
         <ul>
             <?php
+            error_reporting(0); //disable php error reporting as to not print error messages to the user
+
 
             $servername = "localhost";
             $username = "meet";
@@ -140,7 +142,8 @@
 
 <footer>
     <p>for any question, please contact us via us@idk.com</p>
-    <button onclick="for (let el of document.querySelectorAll('.delete')) el.style.visibility = 'visible';">admin mode
+    <button onclick="for (let el of document.querySelectorAll('.delete')) if(el.style.visibility === 'visible') {el.style.visibility = 'hidden';}else{el.style.visibility ='visible'}">
+        admin mode
     </button>
 </footer>
 

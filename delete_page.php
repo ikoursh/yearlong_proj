@@ -8,7 +8,7 @@ $db = "meet_proj_yearlong_final";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $db);
-$conn->query("DELETE FROM " . htmlspecialchars($_GET["fid"]) . " WHERE id=" . htmlspecialchars($_GET["cid"]) . ";");
+$conn->query("DELETE FROM forums WHERE id=\"" . htmlspecialchars($_GET["fid"]) . "\";");
+$conn->query("drop table " . htmlspecialchars($_GET["fid"]));
 $conn->close();
-
-header("Location: forum.php?id=" . htmlspecialchars($_GET["fid"]));
+header("Location: home.php");

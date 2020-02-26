@@ -7,6 +7,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        .delete {
+            visibility: hidden;
+        }
         * {
             box-sizing: border-box;
         }
@@ -75,6 +78,8 @@
         <ul>
             <li><h3>Books!</h3></li>
             <?php
+            error_reporting(0); //disable php error reporting as to not print error messages to the user
+
             $servername = "localhost";
             $username = "meet";
             $password = "=vh2MfzK+G@@t8h!";
@@ -86,7 +91,7 @@
             $books = mysqli_query($conn, "select * FROM forums where tag='book'");
 
             while ($row = $books->fetch_array(MYSQLI_ASSOC)) {
-                echo "<li><a href=\"forum.php?id=" . $row["id"] . "\">" . $row["title"] . "</a></li>";
+                echo "<li><a href=\"forum.php?id=" . $row["id"] . "\">" . $row["title"] . "</a><a class=delete href='delete_page.php?fid=" . $row["id"] . "'><img  alt=\"delete icon\" src='assets/trash.png' width='20px'/></a></li>";
             }
 
             echo "<br>";
@@ -95,7 +100,7 @@
             $movies = mysqli_query($conn, "select * FROM forums where tag='movie'");
 
             while ($row = $movies->fetch_array(MYSQLI_ASSOC)) {
-                echo "<li><a href=\"forum.php?id=" . $row["id"] . "\">" . $row["title"] . "</a></li>";
+                echo "<li><a href=\"forum.php?id=" . $row["id"] . "\">" . $row["title"] . "</a><a class=delete href='delete_page.php?fid=" . $row["id"] . "'><img  alt=\"delete icon\" src='assets/trash.png' width='20px'/></a></li>";
             }
             $conn->close();
             ?>
@@ -109,6 +114,11 @@
     </nav>
 
 </section>
-
+<footer>
+    <p>for any question, please contact us via us@idk.com</p>
+    <button onclick="for (let el of document.querySelectorAll('.delete')) if(el.style.visibility === 'visible') {el.style.visibility = 'hidden';}else{el.style.visibility ='visible'}">
+        admin mode
+    </button>
+</footer>
 </body>
 </html>
