@@ -4,8 +4,9 @@ USE meet_proj_yearlong_final;
 CREATE TABLE sid
 (
     id          INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    poster_name VARCHAR(255),
-    message     VARCHAR(255)
+    poster_name VARCHAR(255) NOT NULL,
+    message     VARCHAR(255) NOT NULL,
+    IP          VARCHAR(50)  NOT NULL
 );
 
 CREATE TABLE forums
@@ -18,6 +19,12 @@ CREATE TABLE forums
     tag         VARCHAR(255)                   NOT NULL
 );
 
+
+CREATE TABLE bannedIP
+(
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    IP VARCHAR(50) NOT NULL
+);
 
 CREATE USER 'meet'@'localhost' IDENTIFIED WITH mysql_native_password BY '=vh2MfzK+G@@t8h!';
 GRANT ALL PRIVILEGES ON *.* TO 'meet'@'localhost';
