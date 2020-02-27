@@ -87,6 +87,13 @@
 <section>
     <nav>
         <ul>
+            <script>
+                function deletePost(fid, id) {
+                    let request = "delete_comment.php?fid=" + fid + "&cid=" + id + "&ban=";
+                    request += confirm("ban user ip?");
+                    window.location.href = (request);
+                }
+            </script>
             <?php
             error_reporting(0); //disable php error reporting as to not print error messages to the user
 
@@ -116,7 +123,7 @@
             $comments = mysqli_query($conn, "select * FROM " . htmlspecialchars($_GET["id"]));
 
             while ($comment = $comments->fetch_array(MYSQLI_ASSOC)) {
-                echo "<b>" . $comment["poster_name"] . "</b>: " . $comment["message"] . "<a class=delete href='delete_comment.php?fid=" . $forum["id"] . "&cid=" . $comment["id"] . "'><img  alt=\"delete icon\" src='assets/trash.png' width='20px'/></a> <br />";
+                echo "<b>" . $comment["poster_name"] . "</b>: " . $comment["message"] . "<button class=delete onclick=deletePost('" . $forum["id"] . "','" . $comment["id"] . "')><img  alt=\"delete icon\" src='assets/trash.png' width='20px'/></button> <br />";
             }
 
             echo "<br/>";
@@ -126,10 +133,10 @@
 
             <form method="post" action="post.php">
                 <label for="name">name:</label><br>
-                <input type="text" id="name" name="name" value="John"><br>
+                <input required type="text" id="name" name="name" value="John"><br>
                 <label for="text">comment:</label><br>
-                <input type="text" id="text" name="text" value="great"><br><br>
-                <?php echo "<input type=\"hidden\" name=\"id\" value=\"" . htmlspecialchars($_GET["id"]) . "\">"; ?>
+                <input required type="text" id="text" name="text" value="great"><br><br>
+                <?php echo "<input required type=\"hidden\" name=\"id\" value=\"" . htmlspecialchars($_GET["id"]) . "\">"; ?>
                 <input type="submit" value="comment">
             </form>
 

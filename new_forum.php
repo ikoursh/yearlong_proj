@@ -28,42 +28,53 @@ $query = "insert into `forums`(id, title, description, imdb, stars, tag) VALUES 
 $conn->query($query);
 
 
-//image handelng:
-if (!($_FILES['fileToUpload']['error'] > 0)) {
-    // You should  check filesize here.
-    if ($_FILES['fileToUpload']['size'] > 25000000) {
-        throw new RuntimeException('Exceeded filesize limit.');
-    }
+// create messages sql table:
 
-    // DO NOT TRUST $_FILES['upfile']['mime'] VALUE !!
-    // Check MIME Type by yourself.
-    $finfo = new finfo(FILEINFO_MIME_TYPE);
-    if (false === $ext = array_search(
-            $finfo->file($_FILES['fileToUpload']['tmp_name']),
-            array(
-                'jpg' => 'image/jpeg',
-                'png' => 'image/png',
-                'gif' => 'image/gif',
-            ),
-            true
-        )) {
-        throw new RuntimeException('Invalid file format.');
-    }
-    // get the file extention
+$sql = "CREATE TABLE " . $id . "( 
+    id          INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    poster_name VARCHAR(255) NOT NULL ,
+    message     VARCHAR(255) NOT NULL ,
+    IP VARCHAR(50) NOT NULL );";
+
+
+$conn->query($sql);
+
+
+//image handling:
+try {
+    if (!($_FILES['fileToUpload']['error'] > 0)) {
+        // You should  check filesize here.
+        if ($_FILES['fileToUpload']['size'] > 25000000) {
+            throw new RuntimeException('Exceeded filesize limit.');
+        }
+
+        // DO NOT TRUST $_FILES['upfile']['mime'] VALUE !!
+        // Check MIME Type by yourself.
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        if (false === $ext = array_search(
+                $finfo->file($_FILES['fileToUpload']['tmp_name']),
+                array(
+                    'jpg' => 'image/jpeg',
+                    'png' => 'image/png',
+                    'gif' => 'image/gif',
+                ),
+                true
+            )) {
+            throw new RuntimeException('Invalid file format.');
+        }
+        // get the file extention
 //    $ext = end(explode(".", $_FILES['fileToUpload']['name']));
 
-    move_uploaded_file(
-        $_FILES['fileToUpload']['tmp_name'],
-        "images/" . $id //. "." . $ext
-    );
+        move_uploaded_file(
+            $_FILES['fileToUpload']['tmp_name'],
+            "images/" . $id //. "." . $ext
+        );
+    }
+
+} catch (Exception $ignored) {
 }
 
 
-// create messages sql table:
-
-
-$sql = "create table " . $id . " (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, poster_name VARCHAR(255) , message VARCHAR(255));";
-$conn->query($sql);
 $conn->close();
 
-header("Location: home.php");
+//header("Location: home.php");
