@@ -8,6 +8,7 @@ $db = "meet_proj_yearlong_final";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $db);
+
 $ipq = mysqli_query($conn, "SELECT IP FROM " . htmlspecialchars($_GET["fid"]) . " WHERE id=\"" . htmlspecialchars($_GET["cid"]) . "\";");
 $ip = $ipq->fetch_array(MYSQLI_ASSOC);
 

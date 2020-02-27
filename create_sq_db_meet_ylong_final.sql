@@ -16,7 +16,8 @@ CREATE TABLE forums
     description VARCHAR(255)                   NOT NULL,
     imdb        VARCHAR(255),
     stars       VARCHAR(255),
-    tag         VARCHAR(255)                   NOT NULL
+    tag         VARCHAR(255)                   NOT NULL,
+    IP          VARCHAR(50)                    NOT NULL
 );
 
 

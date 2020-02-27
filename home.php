@@ -10,6 +10,7 @@
         .delete {
             visibility: hidden;
         }
+
         * {
             box-sizing: border-box;
         }
@@ -66,6 +67,15 @@
             }
         }
     </style>
+
+
+    <script>
+        function deleteReview(id) {
+            let request = "delete_page.php?fid=" + id + "&ban=";
+            request += confirm("ban user ip?");
+            window.location.href = (request);
+        }
+    </script>
 </head>
 <body>
 
@@ -91,7 +101,7 @@
             $books = mysqli_query($conn, "select * FROM forums where tag='book'");
 
             while ($row = $books->fetch_array(MYSQLI_ASSOC)) {
-                echo "<li><a href=\"forum.php?id=" . $row["id"] . "\">" . $row["title"] . "</a><a class=delete href='delete_page.php?fid=" . $row["id"] . "'><img  alt=\"delete icon\" src='assets/trash.png' width='20px'/></a></li>";
+                echo "<li><a href=\"forum.php?id=" . $row["id"] . "\">" . $row["title"] . "</a><button class=delete onclick=deleteReview('" . $row["id"] . "')><img  alt=\"delete icon\" src='assets/trash.png' width='20px'/></button></li>";
             }
 
             echo "<br>";
@@ -100,7 +110,7 @@
             $movies = mysqli_query($conn, "select * FROM forums where tag='movie'");
 
             while ($row = $movies->fetch_array(MYSQLI_ASSOC)) {
-                echo "<li><a href=\"forum.php?id=" . $row["id"] . "\">" . $row["title"] . "</a><a class=delete href='delete_page.php?fid=" . $row["id"] . "'><img  alt=\"delete icon\" src='assets/trash.png' width='20px'/></a></li>";
+                echo "<li><a href=\"forum.php?id=" . $row["id"] . "\">" . $row["title"] . "</a><button class=delete onclick=deleteReview('" . $row["id"] . "')><img  alt=\"delete icon\" src='assets/trash.png' width='20px'/></button></li>";
             }
             $conn->close();
             ?>
