@@ -105,7 +105,7 @@
 
             // Create connection
             $conn = new mysqli($servername, $username, $password, $db);
-            $forum = mysqli_query($conn, " . htmlspecialchars($_GET["id"]) . "\";");
+            $forum = mysqli_query($conn, "select * FROM forums where id=\"" . htmlspecialchars($_GET["id"]) . "\";");
 
             $forum = $forum->fetch_array(MYSQLI_ASSOC);
             echo "<img src='images/" . $forum["id"] . "' alt='picture for " . $forum["title"] . "'>";

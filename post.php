@@ -11,9 +11,7 @@ $conn = new mysqli($servername, $username, $password, $db);
 //check if ip is banned:
 $cip = htmlspecialchars($_SERVER['REMOTE_ADDR']);
 $b = false;
-$banned_ips = mysqli_query($conn, "# noinspection SqlResolveForFile
-
-select IP FROM bannedIP");
+$banned_ips = mysqli_query($conn, "select IP FROM bannedIP");
 
 while ($row = $banned_ips->fetch_array(MYSQLI_ASSOC)) {
     if (($row["IP"]) == $cip) {
