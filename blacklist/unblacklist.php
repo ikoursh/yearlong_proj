@@ -10,7 +10,9 @@ $db = "meet_proj_yearlong_final";
 $conn = new mysqli($servername, $username, $password, $db);
 
 if (isset($_GET["all"])) {
-    $conn->query("delete from bannedip;");
+    $conn->query("# noinspection SqlWithoutWhere
+
+delete from bannedip;");
 } else {
     $conn->query(sprintf("delete from bannedip where id='%s';", $_POST["id"]));
 }
