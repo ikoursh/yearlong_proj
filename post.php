@@ -1,12 +1,7 @@
 <?php
 error_reporting(0); //disable php error reporting as to not print error messages to the user
-$servername = "localhost";
-$username = "meet";
-$password = "=vh2MfzK+G@@t8h!";
-$db = "meet_proj_yearlong_final";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
+include "database.php";
 
 //check if ip is banned:
 $cip = htmlspecialchars($_SERVER['REMOTE_ADDR']);
@@ -20,7 +15,7 @@ while ($row = $banned_ips->fetch_array(MYSQLI_ASSOC)) {
     }
 }
 if (!$b) {
-    $query1 = sprintf("insert into `%s`(poster_name, message, IP) VALUES (\"%s\",\"%s\",\"%s\");", htmlspecialchars($_POST["id"]), htmlspecialchars($_POST["name"]), htmlspecialchars($_POST["text"]), $cip);
+    $query1 = sprintf("insert into `%s`(poster_name, message, IP) VALUES (\"%s\",\"%s\",\"%s\");", mysqli_real_escape_string($conn, htmlspecialchars($_POST["id"])), mysqli_real_escape_string($conn, htmlspecialchars($_POST["name"])), mysqli_real_escape_string($conn, htmlspecialchars($_POST["text"])), $cip);
     $conn->query($query1);
     $conn->close();
 

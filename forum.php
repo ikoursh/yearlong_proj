@@ -95,17 +95,12 @@
                 }
             </script>
             <?php
+
             error_reporting(0); //disable php error reporting as to not print error messages to the user
+            include "database.php";
 
 
-            $servername = "localhost";
-            $username = "meet";
-            $password = "=vh2MfzK+G@@t8h!";
-            $db = "meet_proj_yearlong_final";
-
-            // Create connection
-            $conn = new mysqli($servername, $username, $password, $db);
-            $forum = mysqli_query($conn, "select * FROM forums where id=\"" . htmlspecialchars($_GET["id"]) . "\";");
+            $forum = mysqli_query($conn, sprintf("select * FROM forums where id=\"%s\";", mysqli_real_escape_string($conn, htmlspecialchars($_GET["id"]))));
 
             $forum = $forum->fetch_array(MYSQLI_ASSOC);
             echo "<img src='images/" . $forum["id"] . "' alt='picture for " . $forum["title"] . "'>";

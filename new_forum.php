@@ -1,17 +1,9 @@
 <?php
 error_reporting(0); //disable php error reporting as to not print error messages to the user
-
-
-$servername = "localhost";
-$username = "meet";
-$password = "=vh2MfzK+G@@t8h!";
-$db = "meet_proj_yearlong_final";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
+include "database.php";
 
 //check if ip is banned:
-$cip = htmlspecialchars($_SERVER['REMOTE_ADDR']);
+$cip = mysqli_real_escape_string($conn, htmlspecialchars($_SERVER['REMOTE_ADDR']));
 $b = false;
 $banned_ips = mysqli_query($conn, "select IP FROM bannedIP");
 
@@ -33,7 +25,7 @@ if (!$b) {
     }
 
 
-    $query = sprintf("insert into `forums`(id, title, description, imdb, stars, tag, IP) VALUES (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\");", $id, htmlspecialchars($_POST["title"]), htmlspecialchars($_POST["description"]), htmlspecialchars($_POST["imdb"]), htmlspecialchars($_POST["stars"]), htmlspecialchars($_POST["tag"]), $cip);
+    $query = sprintf("insert into `forums`(id, title, description, imdb, stars, tag, IP) VALUES (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\");", $id, mysqli_real_escape_string($conn, htmlspecialchars($_POST["title"])), mysqli_real_escape_string($conn, htmlspecialchars($_POST["description"])), mysqli_real_escape_string($conn, htmlspecialchars($_POST["imdb"])), mysqli_real_escape_string($conn, htmlspecialchars($_POST["stars"])), mysqli_real_escape_string($conn, htmlspecialchars($_POST["tag"])), $cip);
     $conn->query($query);
 
 
