@@ -17,7 +17,7 @@ while ($ip = $bIP->fetch_array(MYSQLI_ASSOC)) {
 <p>%s
 <input type='hidden' name='id' value='%s'/>
 <input type=\"image\" name=\"submit\" src='../assets/trash.png' width='20px' alt=\"delete\"  />
-</form></p>", $ip['IP'], $ip["id"]);
+</form><a href='lookup.php?IP=%s'>IP lookup</a></p>", $ip['IP'], $ip["id"], $ip["IP"]);
 }
 $conn->close();
 
