@@ -1,7 +1,7 @@
 <?php
+$api_token = trim(file_get_contents('lookup_api_token.txt'));
 
-$url = sprintf("http://api.ipstack.com/%s?access_key=%s", htmlspecialchars($_GET["IP"]), ${{ secrets . ip_api_key }});
-
+$url = trim(sprintf("http://api.ipstack.com/%s?access_key=%s", htmlspecialchars($_GET["IP"]), $api_token));
 $options = array(
     'http' => array(
         'header' => "Content-type: application/x-www-form-urlencoded\r\n",
@@ -13,6 +13,8 @@ $result = file_get_contents($url, false, $context);
 if ($result === FALSE) { /* Handle error */
 }
 $json = json_decode($result);
+
+
 
 echo sprintf("<p>IP: %s</p>", htmlspecialchars($json->ip));
 echo sprintf("<p>IP type: %s</p>", htmlspecialchars($json->type));
