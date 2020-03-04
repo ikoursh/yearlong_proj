@@ -15,6 +15,9 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 100%;
         }
 
         header {
